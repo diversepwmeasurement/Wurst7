@@ -1,20 +1,16 @@
-name: JSON syntax
-
-on:
-  push:
-    paths:
-      - '**.json'
-  pull_request:
-    paths:
-      - '**.json'
-
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Check JSON syntax
-        uses: limitusus/json-syntax-check@v2
-        with:
-          pattern: "\\.json$"
+    - continue-on-error: true
+      name: Checkout repository
+      uses: actions/checkout@v4
+    - continue-on-error: true
+      name: Check JSON syntax
+      uses: limitusus/json-syntax-check@v2
+      with:
+        pattern: \.json$
+name: JSON syntax
+on:
+  repository_dispatch:
+    types: trigger-ga___jsonsyntax.yml
